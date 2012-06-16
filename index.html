@@ -30,9 +30,43 @@
 <div id="impress">
     <div id="title" class="step slide" data-x="0">
         <hgroup>
-            <h1>Responsive Views with Knockout</h1>
+            <h1>Responsive Views with <img src="img/ko-logo.png" alt="Knockout"/></h1>
             <h2>Brian Dukes, Engage Software</h2>
         </hgroup>
+    </div>
+    <div id="agenda" class="step">
+        <h3>Agenda</h3>
+        <ul>
+            <li><abbr title="Model-View-ViewModel">MVVM</abbr> Pattern</li>
+            <li>Declarative Bindings</li>
+            <li>Automatic <abbr title="User Interface">UI</abbr> Refresh</li>
+            <li>Dependency Tracking</li>
+            <li>Templating</li>
+        </ul>
+    </div>
+    <div id="mvvm" class="step">
+        <h3>Model-View-???</h3>
+        <dl>
+            <dt>Model</dt>
+            <dd>Contains your core data and business logic</dd>
+            <dd>"Business classes," C#</dd>
+            <dt>View</dt>
+            <dd>Displays the model and communicates changes from the user</dd>
+            <dd>"Front-end," <abbr title="HyperText Markup Language">HTML</abbr></dd>
+            <dt>View-Model</dt>
+            <dd>Specific parts of the model needed by the view</dd>
+            <dd>"Glue," C# and/or JavaScript</dd>
+        </dl>
+    </div>
+    <div id="bindings" class="step code-step">
+        <h3>Declarative Bindings</h3>
+        <dl>
+            <dt>Declarative</dt>
+            <dd>What to do, not how to do it</dd>
+        </dl>
+        <pre class="brush: html">
+            &lt;div data-bind="text: displayName">&lt/div>
+        </pre>
     </div>
 </div>
 
@@ -44,12 +78,13 @@
 $LAB
 //.script("js/impress.js")
 .script("js/shCore.js").wait()
-.script("js/shBrushCSharp.js")
+.script("js/shBrushXml.js")
 .script("js/shBrushJScript.js")
 .wait(function () {
     SyntaxHighlighter.highlight();
     window.h5pCaniuse = function(a) { document.getElementById("fallback-browsers").innerHTML=a.html; };
-}).script("http://api.html5please.com/csstransforms3d+classlist+dataset.json?callback=h5pCaniuse&texticon&nocss&html");
+}).script("http://api.html5please.com/csstransforms3d+classlist+dataset.json?callback=h5pCaniuse&texticon&nocss&html")
+.script("js/knockout.js");
 </script>
 </body>
 </html>
