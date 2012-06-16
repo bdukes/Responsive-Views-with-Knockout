@@ -1,2 +1,0 @@
-﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ViewServicesFrameworkExampleImplementation.ascx.cs" Inherits="Engage.Dnn.ServicesFrameworkExampleImplementation.ViewServicesFrameworkExampleImplementation" %>
-<asp:Label runat="server" ResourceKey="Hello World!" />
