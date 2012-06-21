@@ -65,7 +65,16 @@
             <dd>What to do, not how to do it</dd>
         </dl>
         <pre class="brush: html">
-            &lt;div data-bind="text: displayName">&lt/div>
+            &lt;div class="account-wrap">
+                &lt;p data-bind="text: displayName">&lt;/p>
+                &lt;p class="address">
+                    &lt;span data-bind="text: streetAddress">&lt;/span>&lt;br />
+                    &lt;span data-bind="text: city">&lt;/span>, 
+                    &lt;span data-bind="text: region">&lt;/span>
+                    &lt;span data-bind="text: postalCode">&lt;/span>
+                &lt;/p>
+                &lt;p class="bio" data-bind="html: bioHtml">&lt;/p>
+            &lt;/div>
         </pre>
     </div>
 </div>
