@@ -74,6 +74,34 @@
             &lt;/div>
         </pre>
     </div>
+    <div id="bindings-js" class="step code-step second-step">
+        <h3>Declarative Bindings</h3>
+        <h6>View Model:</h6>
+        <pre class="brush: js">
+            ko.applyBindings({
+                displayName: 'Kristine Overland',
+                streetAddress: '12345 Database Ln',
+                city: 'Java',
+                region: 'CS',
+                postalCode: 'ABC 123',
+                bioHtml: 'I like &lt;HTML&gt; &amp; JavaScript!'
+            });
+        </pre>
+    </div>
+    <div id="bindings-example" class="step code-step">
+        <h3>Declarative Bindings</h3>
+        <h6>Example:</h6>
+        <div class="account-wrap">
+            <p data-bind="text: displayName"></p>
+            <p class="address">
+                <span data-bind="text: streetAddress"></span><br />
+                <span data-bind="text: city"></span>, 
+                <span data-bind="text: region"></span>
+                <span data-bind="text: postalCode"></span>
+            </p>
+            <p class="bio" data-bind="html: bioHtml"></p>
+        </div>
+    </div>
 </div>
 
 <div class="hint">
@@ -90,7 +118,17 @@ $LAB
     SyntaxHighlighter.highlight();
     window.h5pCaniuse = function(a) { document.getElementById("fallback-browsers").innerHTML=a.html; };
 }).script("http://api.html5please.com/csstransforms3d+classlist+dataset.json?callback=h5pCaniuse&texticon&nocss&html")
-.script("js/knockout.js");
+.script("js/knockout.js")
+.wait(function () {
+    ko.applyBindings({
+        displayName: 'Kristine Overland',
+        streetAddress: '12345 Database Ln',
+        city: 'Java',
+        region: 'CS',
+        postalCode: 'ABC 123',
+        bioHtml: 'I like &lt;HTML&gt; &amp; JavaScript!'
+    }, document.getElementById('bindings-example'));
+});
 </script>
 </body>
 </html>
