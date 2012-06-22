@@ -116,7 +116,7 @@
     </div>
     <div id="automatic-ui-refresh" class="step code-step">
         <h3>Automatic <abbr title="User Interface">UI</abbr> Refresh</h3>
-        <pre class="brush: js, html-script: true">
+        <pre class="brush: js, html-script: true, highlight: [8,10]">
             &lt;div class="preorder-wrap">
                 Quantity requested: 
                 &lt;em data-bind="text: quantity">&lt;/em>
@@ -132,7 +132,50 @@
             &lt;/script>
         </pre>
     </div>
-    <div id="templating" class="step"></div>
+    <div id="templating" class="step code-step">
+        <h3>Templating</h3>
+        <pre class="brush: html, highlight: [1,8,12]">
+            &lt;ul class="products" data-bind="foreach: products">
+                &lt;li>
+                    &lt;h3 data-bind="text: productName">&lt;/h3>
+                    &lt;div data-bind="html: productDescription">&lt;/div>
+                    &lt;ul data-bind="foreach: images">
+                        &lt;li>
+                            &lt;img data-bind="attr: { 
+                                alt: $parent.productName, 
+                                src: src }" />
+                        &lt;/li>
+                    &lt;/ul>
+                    &lt;!-- ko ifnot: soldOut -->
+                    &lt;button>Order Now!&lt;/button>
+                    &lt;!-- /ko -->
+                &lt;/li>
+            &lt;/ul>
+        </pre>
+    </div>
+    <div id="templating-example" class="step">
+        <h3>Templating</h3>
+        <h6>Example:</h6>
+        <ul class="products" data-bind="foreach: products">
+            <li>
+                <h3 data-bind="text: productName"></h3>
+                <div data-bind="html: productDescription"></div>
+                <ul data-bind="foreach: images">
+                    <li>
+                        <img data-bind="attr: { 
+                            alt: $parent.productName, 
+                            src: src }" />
+                    </li>
+                </ul>
+                <!-- ko ifnot: soldOut -->
+                <button>Order Now!</button>
+                <!-- /ko -->
+                <!-- ko if: soldOut -->
+                <p>Sorry, Sold Out!</p>
+                <!-- /ko -->
+            </li>
+        </ul>
+    </div>
     <div id="dependency-tracking" class="step"></div>
 </div>
 
@@ -166,6 +209,21 @@ $LAB
             this.quantity(this.quantity() + 1);
         }
     }, document.getElementById('automatic-ui-refresh-example'));
+
+    ko.applyBindings({ 
+        products: [{
+            productName: 'Widget',
+            productDescription: '<p>High performance widgets</p><p>See <a href="#">specs</a>.</p>',
+            soldOut: false,
+            images: [ { src: 'img/widget.png' }, { src: 'img/widget2.png' } ]
+        },
+        {
+            productName: 'Sprocket',
+            productDescription: '<p>Low performance sprockets are our best selling item.</p><p>See <a href="#">specs</a>.</p>',
+            soldOut: true,
+            images: [ { src: 'img/sprocket.png' } ]
+        }]
+    }, document.getElementById('templating-example'));
 }).wait(function () {
     window.h5pCaniuse = function(a) { document.getElementById("fallback-browsers").innerHTML=a.html; };
 }).script("http://api.html5please.com/csstransforms3d+classlist+dataset.json?callback=h5pCaniuse&texticon&nocss&html");

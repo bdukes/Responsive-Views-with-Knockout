@@ -5,6 +5,8 @@ This is a presentation created for the 2012 DotNetNuke World conference.
 
 It's using the impress.js presentation framework, and this repository is forked from that one as a starting point.
 
+It also uses some stock photos from http://www.public-domain-image.com
+
 LICENSE
 ---------
 
