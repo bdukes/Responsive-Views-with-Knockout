@@ -71,6 +71,7 @@
                     &lt;span data-bind="text: postalCode">&lt;/span>
                 &lt;/p>
                 &lt;p class="bio" data-bind="html: bioHtml">&lt;/p>
+                &lt;button data-bind="click: doSomething">Take Action!&lt;/button>
             &lt;/div>
         </pre>
     </div>
@@ -84,7 +85,8 @@
                 city: 'Java',
                 region: 'CS',
                 postalCode: 'ABC 123',
-                bioHtml: 'I like &lt;HTML&gt; &amp; JavaScript!'
+                bioHtml: 'I like &lt;HTML&gt; &amp; JavaScript!',
+                doSomething: function () { /* ... */ }
             });
         </pre>
     </div>
@@ -100,6 +102,7 @@
                 <span data-bind="text: postalCode"></span>
             </p>
             <p class="bio" data-bind="html: bioHtml"></p>
+            <button data-bind="click: doSomething">Take Action!</button>
         </div>
     </div>
     <div id="automatic-ui-refresh-example" class="step">
@@ -153,7 +156,8 @@ $LAB
         city: 'Java',
         region: 'CS',
         postalCode: 'ABC 123',
-        bioHtml: 'I like &lt;HTML&gt; &amp; JavaScript!'
+        bioHtml: 'I like &lt;HTML&gt; &amp; JavaScript!',
+        doSomething: function () { /* ... */ }
     }, document.getElementById('bindings-example'));
 
     ko.applyBindings({ 
