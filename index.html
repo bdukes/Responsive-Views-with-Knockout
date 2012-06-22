@@ -88,7 +88,7 @@
             });
         </pre>
     </div>
-    <div id="bindings-example" class="step code-step">
+    <div id="bindings-example" class="step">
         <h3>Declarative Bindings</h3>
         <h6>Example:</h6>
         <div class="account-wrap">
@@ -102,31 +102,32 @@
             <p class="bio" data-bind="html: bioHtml"></p>
         </div>
     </div>
-    <div id="automatic-ui-refresh" class="step">
-        <h3>Automatic <abbr title="User Interface">UI</abbr> Refresh</h3>
-        <pre class="brush: js, html-script: true, highlight: [8,12]">
-            &lt;div class="preorder-wrap">
-                Time left in preorder period: 
-                &lt;em data-bind="text: timeRemaining">&lt;/em>
-            &lt;/div>
-            &lt;script>
-            var getTimeRemaining = function () { /* ... */ },
-                viewModel = { 
-                    timeRemaining: ko.observable(getTimeRemaining()) 
-                };
-            ko.applyBindings(viewModel);
-            setInterval(function () { 
-                viewModel.timeRemaining(getTimeRemaining()); 
-            }, 100);
-            &lt;/script>
-        </pre>
-    </div>
     <div id="automatic-ui-refresh-example" class="step">
         <h3>Automatic <abbr title="User Interface">UI</abbr> Refresh</h3>
         <h6>Example:</h6>
         <div class="preorder-wrap">
-            Time left in preorder period: <em data-bind="text: timeRemaining"></em>
+            Quantity requested: 
+            <em data-bind="text: quantity"></em>
+            <button data-bind="click: increase">More!</button>
         </div>
+    </div>
+    <div id="automatic-ui-refresh" class="step code-step">
+        <h3>Automatic <abbr title="User Interface">UI</abbr> Refresh</h3>
+        <pre class="brush: js, html-script: true">
+            &lt;div class="preorder-wrap">
+                Quantity requested: 
+                &lt;em data-bind="text: quantity">&lt;/em>
+                &lt;button data-bind="click: increase">More!&lt;/button>
+            &lt;/div>
+            &lt;script>
+            ko.applyBindings({ 
+                quantity: ko.observable(0),
+                increase: function () {
+                    this.quantity(this.quantity() + 1);
+                }
+            });
+            &lt;/script>
+        </pre>
     </div>
     <div id="templating" class="step"></div>
     <div id="dependency-tracking" class="step"></div>
@@ -144,9 +145,7 @@ $LAB
 .script("js/shBrushJScript.js")
 .wait(function () {
     SyntaxHighlighter.highlight();
-    window.h5pCaniuse = function(a) { document.getElementById("fallback-browsers").innerHTML=a.html; };
-}).script("http://api.html5please.com/csstransforms3d+classlist+dataset.json?callback=h5pCaniuse&texticon&nocss&html")
-.script("js/knockout.js")
+}).script("js/knockout.js")
 .wait(function () {
     ko.applyBindings({
         displayName: 'Kristine Overland',
@@ -156,17 +155,16 @@ $LAB
         postalCode: 'ABC 123',
         bioHtml: 'I like &lt;HTML&gt; &amp; JavaScript!'
     }, document.getElementById('bindings-example'));
-}).script('js/datetime.1-3.js')
-.wait(function () {
-    var releaseDate = Date.UTC(2013, 5, 5),
-        getTimeRemaining = function () {
-            var timeSpan = new TimeSpan(releaseDate - new Date());
-            return Math.floor(timeSpan.totalDays()) + ' Days, ' + timeSpan.hours() + ':' + timeSpan.minutes() + ':' + timeSpan.seconds();
-        },
-        viewModel = { timeRemaining: ko.observable(getTimeRemaining()) };
-    ko.applyBindings(viewModel, document.getElementById('automatic-ui-refresh-example'));
-    setInterval(function () { viewModel.timeRemaining(getTimeRemaining()); }, 100);
-});
+
+    ko.applyBindings({ 
+        quantity: ko.observable(0),
+        increase: function () {
+            this.quantity(this.quantity() + 1);
+        }
+    }, document.getElementById('automatic-ui-refresh-example'));
+}).wait(function () {
+    window.h5pCaniuse = function(a) { document.getElementById("fallback-browsers").innerHTML=a.html; };
+}).script("http://api.html5please.com/csstransforms3d+classlist+dataset.json?callback=h5pCaniuse&texticon&nocss&html");
 </script>
 </body>
 </html>
