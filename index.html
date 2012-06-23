@@ -153,6 +153,25 @@
             &lt;/ul>
         </pre>
     </div>
+    <div id="templating-js" class="step code-step second-step">
+        <h3>Templating</h3>
+        <h6>View Model:</h6>
+        <pre class="brush: js, highlight: [2]">
+            ko.applyBindings({ 
+                products: ko.observableArray([{
+                    productName: ko.observable('Widget'),
+                    productDescription: ko.observable('&lt;p>High performance widgets&lt;/p>&lt;p>See &lt;a href="#">specs&lt;/a>.&lt;/p>'),
+                    soldOut: ko.observable(false),
+                    images: ko.observableArray([ { src: ko.observable('img/widget.png') }, { src: ko.observable('img/widget2.png') } ])
+                }, {
+                    productName: ko.observable('Sprocket'),
+                    productDescription: ko.observable('&lt;p>Low performance sprockets are our best selling item.&lt;/p>&lt;p>See &lt;a href="#">specs&lt;/a>.&lt;/p>'),
+                    soldOut: ko.observable(true),
+                    images: ko.observableArray([ { src: ko.observable('img/sprocket.png') } ])
+                }])
+            })
+        </pre>
+    </div>
     <div id="templating-example" class="step">
         <h3>Templating</h3>
         <h6>Example:</h6>
@@ -211,18 +230,17 @@ $LAB
     }, document.getElementById('automatic-ui-refresh-example'));
 
     ko.applyBindings({ 
-        products: [{
-            productName: 'Widget',
-            productDescription: '<p>High performance widgets</p><p>See <a href="#">specs</a>.</p>',
-            soldOut: false,
-            images: [ { src: 'img/widget.png' }, { src: 'img/widget2.png' } ]
-        },
-        {
-            productName: 'Sprocket',
-            productDescription: '<p>Low performance sprockets are our best selling item.</p><p>See <a href="#">specs</a>.</p>',
-            soldOut: true,
-            images: [ { src: 'img/sprocket.png' } ]
-        }]
+        products: ko.observableArray([{
+                productName: ko.observable('Widget'),
+                productDescription: ko.observable('<p>High performance widgets</p><p>See <a href="#">specs</a>.</p>'),
+                soldOut: ko.observable(false),
+                images: ko.observableArray([ { src: ko.observable('img/widget.png') }, { src: ko.observable('img/widget2.png') } ])
+            }, {
+                productName: ko.observable('Sprocket'),
+                productDescription: ko.observable('<p>Low performance sprockets are our best selling item.</p><p>See <a href="#">specs</a>.</p>'),
+                soldOut: ko.observable(true),
+                images: ko.observableArray([ { src: ko.observable('img/sprocket.png') } ])
+            }])
     }, document.getElementById('templating-example'));
 }).wait(function () {
     window.h5pCaniuse = function(a) { document.getElementById("fallback-browsers").innerHTML=a.html; };
