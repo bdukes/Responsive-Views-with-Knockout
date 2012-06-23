@@ -220,6 +220,16 @@ q strong {
     display: inline;
 }
 
+#templating-example-2 dt, #templating-example-2 dd {
+    float: left;
+    margin: 0.5em;
+    display: inline;
+}
+
+#templating-example-2 dt {
+    clear: both;
+}
+
 .hint {
     /*
         We hide the hint until presentation is started and from browsers not supporting

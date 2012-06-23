@@ -195,6 +195,22 @@
             </li>
         </ul>
     </div>
+    <div id="templating-example-2" class="step">
+        <h3>Templating</h3>
+        <h6>Another Example:</h6>
+        <ul data-bind="foreach: products">
+            <li>
+                <strong data-bind="text: productName"></strong>
+                <button data-bind="click: $root.addToCart">Add To Your Cart</button>
+            </li>
+        </ul>
+        <dl>
+            <!-- ko foreach: cartProducts -->
+            <dt data-bind="text: productName"></dt>
+            <dd data-bind="text: quantity"></dd>
+            <!-- /ko -->
+        </dl>
+    </div>
     <div id="dependency-tracking" class="step"></div>
 </div>
 
@@ -242,6 +258,27 @@ $LAB
                 images: ko.observableArray([ { src: ko.observable('img/sprocket.png') } ])
             }])
     }, document.getElementById('templating-example'));
+
+    var TemplatingExample2ViewModel = function (products) {
+        this.products = products;
+        this.cartProducts = ko.observableArray([]);
+
+        var self = this;
+        this.addToCart = function (product) {
+            var i, len, cartProduct,
+                cartProducts = self.cartProducts();
+            for (i = 0, len = cartProducts.length; i < len; i += 1) {
+                cartProduct = cartProducts[i];
+                if (cartProduct.productName === product.productName) {
+                    cartProduct.quantity(cartProduct.quantity() + 1);
+                    return;
+                }
+            }
+
+            self.cartProducts.push({ productName: product.productName, quantity: ko.observable(1) });
+        };
+    };
+    ko.applyBindings(new TemplatingExample2ViewModel([{ productName: 'Widget' }, { productName: 'Sprocket' }, { productName: 'Cog' }, { productName: 'Pinion' }, { productName: 'Spurwheel' }]), document.getElementById('templating-example-2'));
 }).wait(function () {
     window.h5pCaniuse = function(a) { document.getElementById("fallback-browsers").innerHTML=a.html; };
 }).script("http://api.html5please.com/csstransforms3d+classlist+dataset.json?callback=h5pCaniuse&texticon&nocss&html");
