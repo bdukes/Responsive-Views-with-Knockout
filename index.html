@@ -195,7 +195,50 @@
             </li>
         </ul>
     </div>
-    <div id="templating-example-2" class="step">
+    <div id="templating-2" class="step code-step">
+        <h3>Templating - Another Example</h3>
+        <pre class="brush: html">
+            &lt;ul data-bind="foreach: products">
+                &lt;li>
+                    &lt;strong data-bind="text: productName">&lt;/strong>
+                    &lt;button data-bind="click: $root.addToCart">Add To Your Cart&lt;/button>
+                &lt;/li>
+            &lt;/ul>
+            &lt;dl>
+                &lt;!-- ko foreach: cartProducts -->
+                &lt;dt data-bind="text: productName">&lt;/dt>
+                &lt;dd data-bind="text: quantity">&lt;/dd>
+                &lt;!-- /ko -->
+            &lt;/dl>
+        </pre>
+    </div>
+    <div id="templating-2-js" class="step code-step second-step">
+        <h3>Templating - Another Example</h3>
+        <h6>View Model:</h6>
+        <pre class="brush: js">
+            var ProductsListViewModel = function (products) {
+                this.products = products;
+                this.cartProducts = ko.observableArray([]);
+
+                var self = this;
+                this.addToCart = function (product) {
+                    var i, len, cartProduct,
+                        cartProducts = self.cartProducts();
+                    for (i = 0, len = cartProducts.length; i < len; i += 1) {
+                        cartProduct = cartProducts[i];
+                        if (cartProduct.productName === product.productName) {
+                            cartProduct.quantity(cartProduct.quantity() + 1);
+                            return;
+                        }
+                    }
+
+                    self.cartProducts.push({ productName: product.productName, quantity: ko.observable(1) });
+                };
+            };
+            ko.applyBindings(new ProductsListViewModel([{ productName: 'Widget' }, { productName: 'Sprocket' }, { productName: 'Cog' }, { productName: 'Pinion' }, { productName: 'Spurwheel' }]));
+        </pre>
+    </div>
+    <div id="templating-2-example" class="step">
         <h3>Templating</h3>
         <h6>Another Example:</h6>
         <ul data-bind="foreach: products">
@@ -278,7 +321,7 @@ $LAB
             self.cartProducts.push({ productName: product.productName, quantity: ko.observable(1) });
         };
     };
-    ko.applyBindings(new TemplatingExample2ViewModel([{ productName: 'Widget' }, { productName: 'Sprocket' }, { productName: 'Cog' }, { productName: 'Pinion' }, { productName: 'Spurwheel' }]), document.getElementById('templating-example-2'));
+    ko.applyBindings(new TemplatingExample2ViewModel([{ productName: 'Widget' }, { productName: 'Sprocket' }, { productName: 'Cog' }, { productName: 'Pinion' }, { productName: 'Spurwheel' }]), document.getElementById('templating-2-example'));
 }).wait(function () {
     window.h5pCaniuse = function(a) { document.getElementById("fallback-browsers").innerHTML=a.html; };
 }).script("http://api.html5please.com/csstransforms3d+classlist+dataset.json?callback=h5pCaniuse&texticon&nocss&html");

@@ -220,13 +220,13 @@ q strong {
     display: inline;
 }
 
-#templating-example-2 dt, #templating-example-2 dd {
+#templating-2-example dt, #templating-2-example dd {
     float: left;
     margin: 0.5em;
     display: inline;
 }
 
-#templating-example-2 dt {
+#templating-2-example dt {
     clear: both;
 }
 
