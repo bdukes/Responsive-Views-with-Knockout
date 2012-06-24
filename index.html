@@ -31,7 +31,7 @@
             <h2>Brian Dukes, Engage Software</h2>
         </hgroup>
     </div>
-    <div id="agenda" class="step">
+    <div id="agenda" class="step" data-x="1000">
         <h3>Agenda</h3>
         <ol>
             <li><abbr title="Model-View-ViewModel">MVVM</abbr> Pattern</li>
@@ -41,7 +41,7 @@
             <li>Dependency Tracking</li>
         </ol>
     </div>
-    <div id="mvvm" class="step">
+    <div id="mvvm" class="step" data-x="2000">
         <h3>Model-View-???</h3>
         <dl>
             <dt>Model</dt>
@@ -55,7 +55,7 @@
             <dd>"Glue," C# and/or JavaScript</dd>
         </dl>
     </div>
-    <div id="bindings" class="step code-step">
+    <div id="bindings" class="step code-step first-step" data-x="3100">
         <h3>Declarative Bindings</h3>
         <dl>
             <dt>Declarative</dt>
@@ -75,7 +75,7 @@
             &lt;/div>
         </pre>
     </div>
-    <div id="bindings-js" class="step code-step second-step">
+    <div id="bindings-js" class="step code-step second-step" data-x="3100" data-rotate-y="180">
         <h3>Declarative Bindings</h3>
         <h6>View Model:</h6>
         <pre class="brush: js">
@@ -90,7 +90,7 @@
             });
         </pre>
     </div>
-    <div id="bindings-example" class="step">
+    <div id="bindings-example" class="step" data-x="4200">
         <h3>Declarative Bindings</h3>
         <h6>Example:</h6>
         <div class="account-wrap">
@@ -105,7 +105,7 @@
             <button data-bind="click: doSomething">Take Action!</button>
         </div>
     </div>
-    <div id="automatic-ui-refresh-example" class="step">
+    <div id="automatic-ui-refresh-example" class="step" data-x="5200">
         <h3>Automatic <abbr title="User Interface">UI</abbr> Refresh</h3>
         <h6>Example:</h6>
         <div class="preorder-wrap">
@@ -114,7 +114,7 @@
             <button data-bind="click: increase">More!</button>
         </div>
     </div>
-    <div id="automatic-ui-refresh" class="step code-step">
+    <div id="automatic-ui-refresh" class="step code-step" data-x="6300">
         <h3>Automatic <abbr title="User Interface">UI</abbr> Refresh</h3>
         <pre class="brush: js, html-script: true, highlight: [8,10]">
             &lt;div class="preorder-wrap">
@@ -132,7 +132,7 @@
             &lt;/script>
         </pre>
     </div>
-    <div id="templating" class="step code-step">
+    <div id="templating" class="step code-step first-step" data-x="7500">
         <h3>Templating</h3>
         <pre class="brush: html, highlight: [1,8,12]">
             &lt;ul class="products" data-bind="foreach: products">
@@ -153,7 +153,7 @@
             &lt;/ul>
         </pre>
     </div>
-    <div id="templating-js" class="step code-step second-step">
+    <div id="templating-js" class="step code-step second-step" data-x="7500" data-rotate-y="180">
         <h3>Templating</h3>
         <h6>View Model:</h6>
         <pre class="brush: js, highlight: [2]">
@@ -172,7 +172,7 @@
             })
         </pre>
     </div>
-    <div id="templating-example" class="step">
+    <div id="templating-example" class="step" data-x="8600">
         <h3>Templating</h3>
         <h6>Example:</h6>
         <ul class="products" data-bind="foreach: products">
@@ -195,7 +195,7 @@
             </li>
         </ul>
     </div>
-    <div id="templating-2" class="step code-step">
+    <div id="templating-2" class="step code-step first-step" data-x="9700">
         <h3>Templating - Another Example</h3>
         <pre class="brush: html">
             &lt;ul data-bind="foreach: products">
@@ -212,7 +212,7 @@
             &lt;/dl>
         </pre>
     </div>
-    <div id="templating-2-js" class="step code-step second-step">
+    <div id="templating-2-js" class="step code-step second-step" data-x="9700" data-rotate-y="180">
         <h3>Templating - Another Example</h3>
         <h6>View Model:</h6>
         <pre class="brush: js">
@@ -238,7 +238,7 @@
             ko.applyBindings(new ProductsListViewModel([{ productName: 'Widget' }, { productName: 'Sprocket' }, { productName: 'Cog' }, { productName: 'Pinion' }, { productName: 'Spurwheel' }]));
         </pre>
     </div>
-    <div id="templating-2-example" class="step">
+    <div id="templating-2-example" class="step" data-x="10800">
         <h3>Templating</h3>
         <h6>Another Example:</h6>
         <ul data-bind="foreach: products">
@@ -254,7 +254,7 @@
             <!-- /ko -->
         </dl>
     </div>
-    <div id="dependency-tracking" class="step">
+    <div id="dependency-tracking" class="step" data-x="11800">
         <h3>Dependency Tracking</h3>
         <ul data-bind="foreach: products">
             <li>
@@ -274,7 +274,7 @@
             <dd>$<em data-bind="text:totalPrice"></em></dd>
         </dl>
     </div>
-    <div id="dependency-tracking-js" class="step code-step">
+    <div id="dependency-tracking-js" class="step code-step" data-x="12900">
         <h3>Dependency Tracking</h3>
         <h6>View Model:</h6>
         <pre class="brush:js">
@@ -294,7 +294,7 @@
             });
         </pre>
     </div>
-    <div id="review" class="step">
+    <div id="review" class="step" data-x="14000">
         <h3>Review</h3>
         <ol>
             <li><abbr title="Model-View-ViewModel">MVVM</abbr> Pattern</li>
@@ -312,7 +312,7 @@
 <script src="js/LAB.min.js"></script>
 <script>
 $LAB
-//.script("js/impress.js")
+.script("js/impress.js")
 .script("js/shCore.js").wait()
 .script("js/shBrushXml.js")
 .script("js/shBrushJScript.js")

@@ -117,6 +117,9 @@ dd {
 code, pre {
     font-family: Consolas, 'Bitstream Vera Sans Mono', monospace;
 }
+div.syntaxhighlighter {
+    max-height: 16em;
+}
 
 .fallback-message {
     font-family: sans-serif;
@@ -198,6 +201,9 @@ code, pre {
 .impress-enabled .second-step {
     opacity: 0;    
 }
+.impress-enabled .first-step.past {
+    opacity: 0;    
+}
 
 q {
     display: block;
@@ -214,6 +220,11 @@ q strong {
 #title h1 {
     line-height: 72px;
     margin: 100px 0 0 0;
+}
+
+#templating-example .products {
+    height: 15em;
+    overflow: auto;
 }
 
 #templating-example li li {
