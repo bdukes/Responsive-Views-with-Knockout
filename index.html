@@ -33,13 +33,13 @@
     </div>
     <div id="agenda" class="step">
         <h3>Agenda</h3>
-        <ul>
+        <ol>
             <li><abbr title="Model-View-ViewModel">MVVM</abbr> Pattern</li>
             <li>Declarative Bindings</li>
             <li>Automatic <abbr title="User Interface">UI</abbr> Refresh</li>
             <li>Templating</li>
             <li>Dependency Tracking</li>
-        </ul>
+        </ol>
     </div>
     <div id="mvvm" class="step">
         <h3>Model-View-???</h3>
@@ -217,11 +217,11 @@
         <h6>View Model:</h6>
         <pre class="brush: js">
             var ProductsListViewModel = function (products) {
-                this.products = products;
-                this.cartProducts = ko.observableArray([]);
-
                 var self = this;
-                this.addToCart = function (product) {
+                self.products = products;
+                self.cartProducts = ko.observableArray([]);
+
+                self.addToCart = function (product) {
                     var i, len, cartProduct,
                         cartProducts = self.cartProducts();
                     for (i = 0, len = cartProducts.length; i < len; i += 1) {
@@ -254,7 +254,56 @@
             <!-- /ko -->
         </dl>
     </div>
-    <div id="dependency-tracking" class="step"></div>
+    <div id="dependency-tracking" class="step">
+        <h3>Dependency Tracking</h3>
+        <ul data-bind="foreach: products">
+            <li>
+                <strong data-bind="text: productName"></strong> 
+                $<em data-bind="text:price"></em>
+                <button data-bind="click: $root.addToCart">Add To Your Cart</button>
+            </li>
+        </ul>
+        <dl>
+            <!-- ko foreach: cartProducts -->
+            <dt data-bind="text: productName"></dt>
+            <dd data-bind="text: quantity"></dd>
+            <!-- /ko -->
+            
+            <dt>Totals</dt>
+            <dd data-bind="text: totalQuantity"></dd>
+            <dd>$<em data-bind="text:totalPrice"></em></dd>
+        </dl>
+    </div>
+    <div id="dependency-tracking-js" class="step code-step">
+        <h3>Dependency Tracking</h3>
+        <h6>View Model:</h6>
+        <pre class="brush:js">
+            self.totalQuantity = ko.computed(function () {
+                var q = 0;
+                self.cartProducts().forEach(function (cartItem) {
+                    q += cartItem.quantity();
+                });
+                return q;
+            });
+            self.totalPrice = ko.computed(function () {
+                var p = 0;
+                self.cartProducts().forEach(function (cartItem) {
+                    p += cartItem.price * cartItem.quantity();
+                });
+                return p;
+            });
+        </pre>
+    </div>
+    <div id="review" class="step">
+        <h3>Review</h3>
+        <ol>
+            <li><abbr title="Model-View-ViewModel">MVVM</abbr> Pattern</li>
+            <li>Declarative Bindings</li>
+            <li>Automatic <abbr title="User Interface">UI</abbr> Refresh</li>
+            <li>Templating</li>
+            <li>Dependency Tracking</li>
+        </ol>
+    </div>
 </div>
 
 <div class="hint">
@@ -270,6 +319,7 @@ $LAB
 .wait(function () {
     SyntaxHighlighter.highlight();
 }).script("js/knockout.js")
+.script("js/Array.forEach.js")
 .wait(function () {
     ko.applyBindings({
         displayName: 'Kristine Overland',
@@ -303,11 +353,11 @@ $LAB
     }, document.getElementById('templating-example'));
 
     var TemplatingExample2ViewModel = function (products) {
-        this.products = products;
-        this.cartProducts = ko.observableArray([]);
-
         var self = this;
-        this.addToCart = function (product) {
+        self.products = products;
+        self.cartProducts = ko.observableArray([]);
+
+        self.addToCart = function (product) {
             var i, len, cartProduct,
                 cartProducts = self.cartProducts();
             for (i = 0, len = cartProducts.length; i < len; i += 1) {
@@ -322,7 +372,42 @@ $LAB
         };
     };
     ko.applyBindings(new TemplatingExample2ViewModel([{ productName: 'Widget' }, { productName: 'Sprocket' }, { productName: 'Cog' }, { productName: 'Pinion' }, { productName: 'Spurwheel' }]), document.getElementById('templating-2-example'));
-}).wait(function () {
+
+    var DependencyTrackingViewModel = function (products) {
+        var self = this;
+        self.products = products;
+        self.cartProducts = ko.observableArray([]);
+        self.totalQuantity = ko.computed(function () {
+            var q = 0;
+            self.cartProducts().forEach(function (cartItem) {
+                q += cartItem.quantity();
+            });
+            return q;
+        });
+        self.totalPrice = ko.computed(function () {
+            var p = 0;
+            self.cartProducts().forEach(function (cartItem) {
+                p += cartItem.price * cartItem.quantity();
+            });
+            return p;
+        });
+
+        self.addToCart = function (product) {
+            var i, len, cartProduct,
+                cartProducts = self.cartProducts();
+            for (i = 0, len = cartProducts.length; i < len; i += 1) {
+                cartProduct = cartProducts[i];
+                if (cartProduct.productName === product.productName) {
+                    cartProduct.quantity(cartProduct.quantity() + 1);
+                    return;
+                }
+            }
+
+            self.cartProducts.push({ productName: product.productName, price: product.price, quantity: ko.observable(1) });
+        };
+    };
+    ko.applyBindings(new DependencyTrackingViewModel([{ productName: 'Widget', price: 10.05 }, { productName: 'Sprocket', price: 135.09 }, { productName: 'Cog', price: 19.99 }, { productName: 'Pinion', price: 20.00 }, { productName: 'Spurwheel', price: 75.15 }]), document.getElementById('dependency-tracking'));
+
     window.h5pCaniuse = function(a) { document.getElementById("fallback-browsers").innerHTML=a.html; };
 }).script("http://api.html5please.com/csstransforms3d+classlist+dataset.json?callback=h5pCaniuse&texticon&nocss&html");
 </script>

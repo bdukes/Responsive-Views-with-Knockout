@@ -220,13 +220,13 @@ q strong {
     display: inline;
 }
 
-#templating-2-example dt, #templating-2-example dd {
+#templating-2-example dt, #templating-2-example dd, #dependency-tracking dt, #dependency-tracking dd {
     float: left;
     margin: 0.5em;
     display: inline;
 }
 
-#templating-2-example dt {
+#templating-2-example dt, #dependency-tracking dt {
     clear: both;
 }
 
